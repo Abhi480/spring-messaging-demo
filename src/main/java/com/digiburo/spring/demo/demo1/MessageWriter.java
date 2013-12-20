@@ -1,4 +1,4 @@
-package com.digiburo.spring.demo.messaging;
+package com.digiburo.spring.demo.demo1;
 
 /**
  * Created by gsc on 12/12/13.

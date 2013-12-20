@@ -1,20 +1,15 @@
-package com.digiburo.integration;
+package com.digiburo.spring.demo;
 
 import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:message-configuration.xml")
+//RunWith(SpringJUnit4ClassRunner.class)
+//ContextConfiguration("classpath:message-configuration.xml")
 public class AppTests {
+    /*
     @Autowired
     private JobLauncher jobLauncher;
 
@@ -28,4 +23,5 @@ public class AppTests {
         JobExecution jobExecution = jobLauncher.run(job, builder.toJobParameters());
         Assert.assertEquals("COMPLETED", jobExecution.getExitStatus().getExitCode());
     }
+    */
 }

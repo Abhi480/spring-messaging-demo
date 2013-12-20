@@ -1,4 +1,4 @@
-package com.digiburo.spring.demo.messaging;
+package com.digiburo.spring.demo.demo1;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
