@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- simple-queue-configuration -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.0.xsd
+         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+  <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+    <property name="brokerURL" value="tcp://localhost:61616"/>
+  </bean>
+
+  <bean id="simpleQueue" class="org.apache.activemq.command.ActiveMQQueue">
+    <constructor-arg index="0" value="simple.queue"/>
+  </bean>
+
+  <bean id="messageConverter" class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
+
+  <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+    <property name="connectionFactory" ref="connectionFactory"/>
+    <property name="defaultDestination" ref="simpleQueue"/>
+    <property name="receiveTimeout" value="10000"/>
+    <property name="messageConverter" ref="messageConverter"/>
+  </bean>
+
+  <bean id="messageListener" class="com.digiburo.spring.demo.simple_queue.SimpleListener"/>
+
+  <jms:listener-container connection-factory="connectionFactory" message-converter="messageConverter">
+    <jms:listener destination="simple.queue" ref="messageListener" method="onMessage"/>
+  </jms:listener-container>
+
+  <bean id="errorHandler" class="com.digiburo.spring.demo.simple_queue.SimpleErrorHandler"/>
+
+  <bean id="listener" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <property name="errorHandler" ref="errorHandler"/>
+    <property name="destinationName" value="simpleQueue"/>
+    <property name="connectionFactory" ref="connectionFactory"/>
+  </bean>
+</beans>

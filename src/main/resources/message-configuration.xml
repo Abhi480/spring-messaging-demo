@@ -13,20 +13,24 @@
     <property name="brokerURL" value="tcp://localhost:61616"/>
   </bean>
 
+  <bean id="demoMessageConverter" class="com.digiburo.spring.demo.common.CommonMessageConverter"/>
+
+  <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+    <property name="connectionFactory" ref="connectionFactory"/>
+    <property name="defaultDestinationName" value="demo.queue"/>
+    <property name="messageConverter" ref="demoMessageConverter"/>
+  </bean>
+
+  <!-- -->
+  <!-- -->
+  <!-- -->
+
   <tx:annotation-driven/>
 
   <bean id="transactionManager" class="org.springframework.jms.connection.JmsTransactionManager">
     <property name="connectionFactory">
       <ref bean="connectionFactory"/>
     </property>
-  </bean>
-
-  <bean id="demoMessageConverter" class="com.digiburo.spring.demo.demo1.DemoMessageConverter"/>
-
-  <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-    <property name="connectionFactory" ref="connectionFactory"/>
-    <property name="defaultDestinationName" value="demo.queue"/>
-    <property name="messageConverter" ref="demoMessageConverter"/>
   </bean>
 
   <bean id="messageWriter" class="com.digiburo.spring.demo.demo1.MessageWriterImpl">

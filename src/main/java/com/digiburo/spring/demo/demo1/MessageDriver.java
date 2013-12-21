@@ -1,5 +1,6 @@
 package com.digiburo.spring.demo.demo1;
 
+import com.digiburo.spring.demo.common.CommonMessagePayload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,18 +8,18 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * Write a JMS message for MessageListener
+ * Write a JMS message for SimpleListener
  */
 public class MessageDriver {
 
   /**
-   * Write a message for MessageListener
+   * Write a message for SimpleListener
    */
   private void execute() {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext(CONTEXT_NAME);
 
     MessageWriter messageWriter = (MessageWriter) applicationContext.getBean("messageWriter");
-    messageWriter.writePayload(new MessagePayload("test payload"));
+    messageWriter.writePayload(new CommonMessagePayload("test payload"));
   }
 
   /**

@@ -1,4 +1,4 @@
-package com.digiburo.spring.demo.demo1;
+package com.digiburo.spring.demo.common;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,14 +13,14 @@ import javax.jms.Session;
 /**
  * Created by gsc on 12/16/13.
  */
-public class DemoMessageConverter implements MessageConverter {
+public class CommonMessageConverter implements MessageConverter {
 
   public Object fromMessage(Message message) throws JMSException, MessageConversionException {
     LOGGER.info("fresh fromMessage");
 
     MapMessage mapMessage = (MapMessage) message;
 
-    MessagePayload messagePayload = new MessagePayload();
+    CommonMessagePayload messagePayload = new CommonMessagePayload();
     messagePayload.setMessageText(mapMessage.getString(KEY_TEXT));
     return(messagePayload);
   }
@@ -28,7 +28,7 @@ public class DemoMessageConverter implements MessageConverter {
   public Message toMessage(Object object, Session session) throws JMSException, MessageConversionException {
     LOGGER.info("fresh toMessage");
 
-    MessagePayload messagePayload = (MessagePayload) object;
+    CommonMessagePayload messagePayload = (CommonMessagePayload) object;
 
     MapMessage message = session.createMapMessage();
     message.setString(KEY_TEXT, messagePayload.getMessageText());
@@ -40,5 +40,5 @@ public class DemoMessageConverter implements MessageConverter {
   public static String KEY_CREATION_TIME = "KEY_CREATION_TIME";
 
   //
-  public static final Logger LOGGER = LoggerFactory.getLogger(DemoMessageConverter.class);
+  public static final Logger LOGGER = LoggerFactory.getLogger(CommonMessageConverter.class);
 }

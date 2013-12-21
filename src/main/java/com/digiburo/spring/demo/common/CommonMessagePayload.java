@@ -1,4 +1,4 @@
-package com.digiburo.spring.demo.demo1;
+package com.digiburo.spring.demo.common;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,13 +6,13 @@ import java.util.Date;
 /**
  * Created by gsc on 12/13/13.
  */
-public class MessagePayload {
+public class CommonMessagePayload {
 
-  public MessagePayload() {
+  public CommonMessagePayload() {
     //empty
   }
 
-  public MessagePayload(String arg) {
+  public CommonMessagePayload(String arg) {
     _messageText = arg;
   }
 

@@ -1,20 +1,38 @@
-package com.digiburo.spring.demo.demo1;
+package com.digiburo.spring.demo.simple_queue;
 
-import com.digiburo.spring.demo.common.CommonMessagePayload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
+
+
 /**
- * Created by gsc on 12/13/13.
+ * simple_queue message listener
+ *
+ * @author gsc
  */
-public class MessageListener {
+public class SimpleListener implements MessageListener {
 
   /**
    *
-   * @param arg
+   * @param message
    */
-  public void messageDisplay(CommonMessagePayload arg) {
-    LOGGER.info("fresh message:" + arg.toString());
+  public void onMessage(final Message message) {
+    try {
+      TextMessage textMessage = (TextMessage) message;
+      LOGGER.info("extracted:" + textMessage.getText());
+
+      LOGGER.debug("messageId:" + textMessage.getJMSMessageID());
+      LOGGER.debug("timeStamp:" + textMessage.getJMSTimestamp());
+      LOGGER.debug("replyTo:" + textMessage.getJMSReplyTo());
+    } catch(JMSException exception) {
+      exception.printStackTrace();
+    }
+
+    throw new IllegalArgumentException("bogus exception");
   }
 
   /*
@@ -33,5 +51,10 @@ public class MessageListener {
     */
 
   //
-  public static final Logger LOGGER = LoggerFactory.getLogger(MessageListener.class);
+  public static final Logger LOGGER = LoggerFactory.getLogger(SimpleListener.class);
 }
+
+/*
+ * Copyright 2013 Digital Burro, INC
+ * Created on December 20, 2013 by gsc
+ */
