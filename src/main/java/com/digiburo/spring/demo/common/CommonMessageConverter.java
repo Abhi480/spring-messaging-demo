@@ -1,5 +1,6 @@
 package com.digiburo.spring.demo.common;
 
+import com.digiburo.spring.demo.demo1.CommonMessagePayload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.support.converter.MessageConversionException;

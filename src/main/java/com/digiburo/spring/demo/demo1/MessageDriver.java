@@ -1,6 +1,5 @@
 package com.digiburo.spring.demo.demo1;
 
-import com.digiburo.spring.demo.common.CommonMessagePayload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

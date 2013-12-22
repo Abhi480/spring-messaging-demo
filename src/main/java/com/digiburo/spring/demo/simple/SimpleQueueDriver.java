@@ -1,4 +1,4 @@
-package com.digiburo.spring.demo.simple_queue;
+package com.digiburo.spring.demo.simple;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +7,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
 /**
- * simple_queue topic writer
+ * Exercise a simple "point to point" queue.
+ * Unidirectional message flow w/no response from client.
+ * A message w/a single String is produced in SimpleQueueDriver and converted to TextMessage by SimpleMessageConverter.
+ * SimpleListener will process message by logging message content and some header values.
+ * Note there are two SimpleListeners but only one will respond (because this is a queue)
+ * Errors at client end will be managed by SimpleErrorHandler.
  *
  * @author gsc
  */
@@ -20,7 +25,7 @@ public class SimpleQueueDriver {
     LOGGER.debug("entering execute");
 
     JmsTemplate jmsTemplate = (JmsTemplate) context.getBean("jmsTemplate");
-    jmsTemplate.convertAndSend("simple_queue text message");
+    jmsTemplate.convertAndSend("simple text message");
   }
 
   /**
@@ -39,11 +44,9 @@ public class SimpleQueueDriver {
 
     ApplicationContext context = new ClassPathXmlApplicationContext(CONTEXT_NAME);
 
-    SimpleQueueDriver dw = new SimpleQueueDriver();
-    dw.logTest();
-    dw.execute(context);
-
-//    Thread.sleep(10000L);
+    SimpleQueueDriver driver = new SimpleQueueDriver();
+    driver.logTest();
+    driver.execute(context);
 
     System.out.println("end");
   }

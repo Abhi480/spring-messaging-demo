@@ -1,4 +1,4 @@
-package com.digiburo.spring.demo.simple_topic;
+package com.digiburo.spring.demo.simple;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,11 +7,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
 /**
- * simple_queue topic writer
+ * simple topic writer
  *
  * @author gsc
  */
-public class SimpleDriver {
+public class SimpleTopicDriver {
 
   /**
    *
@@ -20,7 +20,7 @@ public class SimpleDriver {
     LOGGER.debug("entering execute");
 
     JmsTemplate jmsTemplate = (JmsTemplate) context.getBean("jmsTemplate");
-    jmsTemplate.convertAndSend("simple queue text message");
+    jmsTemplate.convertAndSend("simple topic text message");
   }
 
   /**
@@ -39,20 +39,18 @@ public class SimpleDriver {
 
     ApplicationContext context = new ClassPathXmlApplicationContext(CONTEXT_NAME);
 
-    SimpleDriver dw = new SimpleDriver();
-    dw.logTest();
-    dw.execute(context);
-
-//    Thread.sleep(10000L);
+    SimpleTopicDriver driver = new SimpleTopicDriver();
+    driver.logTest();
+    driver.execute(context);
 
     System.out.println("end");
   }
 
   //
-  public static final String CONTEXT_NAME = "simple-queue-configuration.xml";
+  public static final String CONTEXT_NAME = "simple-topic-configuration.xml";
 
   //
-  public static final Logger LOGGER = LoggerFactory.getLogger(SimpleDriver.class);
+  public static final Logger LOGGER = LoggerFactory.getLogger(SimpleTopicDriver.class);
 }
 
 /*
