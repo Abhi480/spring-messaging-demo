@@ -1,11 +1,11 @@
-package com.digiburo.spring.demo.simple;
+package com.digiburo.spring.demo.simple_aq;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ErrorHandler;
 
 /**
- * simple error handler
+ * simple_aq error handler
  *
  * @author gsc
  */

@@ -1,4 +1,4 @@
-package com.digiburo.spring.demo.simple;
+package com.digiburo.spring.demo.simple_aq;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,16 +7,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
 /**
- * Exercise a simple "point to point" queue.
- * Unidirectional message flow w/no response from client.
- * A message w/a single String is produced in SimpleQueueDriver and converted to TextMessage by SimpleMessageConverter.
- * SimpleListener will process message by logging message content and some header values.
- * Note there are two SimpleListeners but only one will respond (because this is a queue)
- * Errors at client end will be managed by SimpleErrorHandler.
+ * simple_aq topic writer
  *
  * @author gsc
  */
-public class SimpleQueueDriver {
+public class SimpleTopicDriver {
 
   /**
    *
@@ -25,7 +20,7 @@ public class SimpleQueueDriver {
     LOGGER.debug("entering execute");
 
     JmsTemplate jmsTemplate = (JmsTemplate) context.getBean("jmsTemplate");
-    jmsTemplate.convertAndSend("simple text message");
+    jmsTemplate.convertAndSend("simple_aq topic text message");
   }
 
   /**
@@ -44,7 +39,7 @@ public class SimpleQueueDriver {
 
     ApplicationContext context = new ClassPathXmlApplicationContext(CONTEXT_NAME);
 
-    SimpleQueueDriver driver = new SimpleQueueDriver();
+    SimpleTopicDriver driver = new SimpleTopicDriver();
     driver.logTest();
     driver.execute(context);
 
@@ -52,10 +47,10 @@ public class SimpleQueueDriver {
   }
 
   //
-  public static final String CONTEXT_NAME = "simple-queue-configuration.xml";
+  public static final String CONTEXT_NAME = "simple-topic-configuration.xml";
 
   //
-  public static final Logger LOGGER = LoggerFactory.getLogger(SimpleQueueDriver.class);
+  public static final Logger LOGGER = LoggerFactory.getLogger(SimpleTopicDriver.class);
 }
 
 /*

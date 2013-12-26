@@ -1,4 +1,4 @@
-package com.digiburo.spring.demo.simple;
+package com.digiburo.spring.demo.simple_aq;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,7 @@ import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
 /**
- * simple message listener
+ * simple_aq message listener
  *
  * @author gsc
  */
@@ -31,8 +31,8 @@ public class SimpleListener implements MessageListener {
       exception.printStackTrace();
     }
 
-// uncomment to test error handler
-//    throw new IllegalArgumentException("bogus exception");
+    // uncomment to test error handler
+    //throw new IllegalArgumentException("bogus exception");
   }
 
   public void setListenerNdx(Integer arg) {

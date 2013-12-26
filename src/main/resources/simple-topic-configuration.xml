@@ -24,15 +24,15 @@
     <property name="receiveTimeout" value="10000"/>
   </bean>
 
-  <bean id="messageListener1" class="com.digiburo.spring.demo.simple.SimpleListener">
+  <bean id="messageListener1" class="com.digiburo.spring.demo.simple_aq.SimpleListener">
     <property name="listenerNdx" value="1"/>
   </bean>
 
-  <bean id="messageListener2" class="com.digiburo.spring.demo.simple.SimpleListener">
+  <bean id="messageListener2" class="com.digiburo.spring.demo.simple_aq.SimpleListener">
     <property name="listenerNdx" value="2"/>
   </bean>
 
-  <bean id="errorHandler" class="com.digiburo.spring.demo.simple.SimpleErrorHandler"/>
+  <bean id="errorHandler" class="com.digiburo.spring.demo.simple_aq.SimpleErrorHandler"/>
 
   <bean id="jmsListenerContainer1" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
     <property name="connectionFactory" ref="connectionFactory"/>

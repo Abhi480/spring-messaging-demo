@@ -1,0 +1,4 @@
+/////////////////////
+//SqsQueueDriver//
+/////////////////////
+Exercise an Amazon SQS queue using Nevado

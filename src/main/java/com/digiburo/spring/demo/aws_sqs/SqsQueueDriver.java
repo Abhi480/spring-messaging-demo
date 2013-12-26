@@ -1,4 +1,4 @@
-package com.digiburo.spring.demo.simple;
+package com.digiburo.spring.demo.aws_sqs;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,11 +7,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
 /**
- * simple topic writer
+ * Exercise Amazon SQS queue
  *
  * @author gsc
  */
-public class SimpleTopicDriver {
+public class SqsQueueDriver {
 
   /**
    *
@@ -20,7 +20,10 @@ public class SimpleTopicDriver {
     LOGGER.debug("entering execute");
 
     JmsTemplate jmsTemplate = (JmsTemplate) context.getBean("jmsTemplate");
-    jmsTemplate.convertAndSend("simple topic text message");
+
+    for (int ii = 0; ii < 5; ii++) {
+      jmsTemplate.convertAndSend("simple aws_sqs text message:" + ii);
+    }
   }
 
   /**
@@ -34,12 +37,17 @@ public class SimpleTopicDriver {
     LOGGER.error("error message");
   }
 
+  /**
+   *
+   * @param args
+   * @throws Exception
+   */
   public static void main(String[] args) throws Exception {
     System.out.println("begin");
 
     ApplicationContext context = new ClassPathXmlApplicationContext(CONTEXT_NAME);
 
-    SimpleTopicDriver driver = new SimpleTopicDriver();
+    SqsQueueDriver driver = new SqsQueueDriver();
     driver.logTest();
     driver.execute(context);
 
@@ -47,13 +55,13 @@ public class SimpleTopicDriver {
   }
 
   //
-  public static final String CONTEXT_NAME = "simple-topic-configuration.xml";
+  public static final String CONTEXT_NAME = "sqs-queue-configuration.xml";
 
   //
-  public static final Logger LOGGER = LoggerFactory.getLogger(SimpleTopicDriver.class);
+  public static final Logger LOGGER = LoggerFactory.getLogger(SqsQueueDriver.class);
 }
 
 /*
  * Copyright 2013 Digital Burro, INC
- * Created on December 20, 2013 by gsc
+ * Created on December 25, 2013 by gsc
  */
